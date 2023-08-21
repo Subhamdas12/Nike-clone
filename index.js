@@ -8,7 +8,9 @@ const path = require("path");
 server.use(express.static(path.resolve(__dirname, "build")));
 server.use(express.json());
 server.use(cors({}));
-
+server.get("*", (req, res) => {
+  res.sendFile(path.resolve("build", "index.html"));
+});
 main().catch((err) => console.log(err));
 const port = process.env.PORT || 8080;
 async function main() {
