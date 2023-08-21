@@ -1,11 +1,11 @@
 {
   "files": {
     "main.css": "/static/css/main.8db5c238.css",
-    "main.js": "/static/js/main.2a171483.js",
+    "main.js": "/static/js/main.3283ed41.js",
     "static/js/787.cda612ba.chunk.js": "/static/js/787.cda612ba.chunk.js",
-    "static/media/NikeShoePortrait.mp4": "/static/media/NikeShoePortrait.9c7f190ff869ba2d8b88.mp4",
-    "static/media/NikeFashionPortrait.mp4": "/static/media/NikeFashionPortrait.935d055a07d8419e5016.mp4",
-    "static/media/NikeAddPortrait.mp4": "/static/media/NikeAddPortrait.74455e701aac22d13af3.mp4",
+    "static/media/NikeShoePortrait.mp4": "/static/media/NikeShoePortrait.5bb0221fbc979f5f84c3.mp4",
+    "static/media/NikeFashionPortrait.mp4": "/static/media/NikeFashionPortrait.b372f70612267eb6c83e.mp4",
+    "static/media/NikeAddPortrait.mp4": "/static/media/NikeAddPortrait.f60596586af3710525c1.mp4",
     "static/media/branding.jpg": "/static/media/branding.75224baa94a668ec1a5e.jpg",
     "static/media/dressToImpress.jpg": "/static/media/dressToImpress.63af4b1c8f91c9f90cee.jpg",
     "static/media/1e8674ca-9bad-49b2-9c92-9618d9d73bff.webp": "/static/media/1e8674ca-9bad-49b2-9c92-9618d9d73bff.1597f1bb7995dee63970.webp",
@@ -29,11 +29,11 @@
     "static/media/logo.svg": "/static/media/logo.b2e5a01e505f739f1484b881277d5186.svg",
     "index.html": "/index.html",
     "main.8db5c238.css.map": "/static/css/main.8db5c238.css.map",
-    "main.2a171483.js.map": "/static/js/main.2a171483.js.map",
+    "main.3283ed41.js.map": "/static/js/main.3283ed41.js.map",
     "787.cda612ba.chunk.js.map": "/static/js/787.cda612ba.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.8db5c238.css",
-    "static/js/main.2a171483.js"
+    "static/js/main.3283ed41.js"
   ]
 }
