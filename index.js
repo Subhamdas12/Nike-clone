@@ -17,6 +17,9 @@ async function main() {
   await mongoose.connect(process.env.MONGO_URL);
   console.log("Database connected");
 }
+server.get("/", (req, res) => {
+  res.send("Hello World!");
+});
 server.listen(port, () => {
   console.log("Server started");
 });
