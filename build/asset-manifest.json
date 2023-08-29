@@ -1,11 +1,8 @@
 {
   "files": {
-    "main.css": "/static/css/main.c536535a.css",
-    "main.js": "/static/js/main.efce3ebc.js",
+    "main.css": "/static/css/main.63e53c53.css",
+    "main.js": "/static/js/main.8de821a7.js",
     "static/js/787.cda612ba.chunk.js": "/static/js/787.cda612ba.chunk.js",
-    "static/media/NikeShoePortrait.mp4": "/static/media/NikeShoePortrait.5bb0221fbc979f5f84c3.mp4",
-    "static/media/NikeFashionPortrait.mp4": "/static/media/NikeFashionPortrait.b372f70612267eb6c83e.mp4",
-    "static/media/NikeAddPortrait.mp4": "/static/media/NikeAddPortrait.f60596586af3710525c1.mp4",
     "static/media/branding.jpg": "/static/media/branding.75224baa94a668ec1a5e.jpg",
     "static/media/dressToImpress.jpg": "/static/media/dressToImpress.63af4b1c8f91c9f90cee.jpg",
     "static/media/1e8674ca-9bad-49b2-9c92-9618d9d73bff.webp": "/static/media/1e8674ca-9bad-49b2-9c92-9618d9d73bff.1597f1bb7995dee63970.webp",
@@ -27,12 +24,12 @@
     "static/media/bag.png": "/static/media/bag.9c816c6b923ef947a58e.png",
     "static/media/search.png": "/static/media/search.ca7aae46e8e72453beed.png",
     "index.html": "/index.html",
-    "main.c536535a.css.map": "/static/css/main.c536535a.css.map",
-    "main.efce3ebc.js.map": "/static/js/main.efce3ebc.js.map",
+    "main.63e53c53.css.map": "/static/css/main.63e53c53.css.map",
+    "main.8de821a7.js.map": "/static/js/main.8de821a7.js.map",
     "787.cda612ba.chunk.js.map": "/static/js/787.cda612ba.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.c536535a.css",
-    "static/js/main.efce3ebc.js"
+    "static/css/main.63e53c53.css",
+    "static/js/main.8de821a7.js"
   ]
 }
