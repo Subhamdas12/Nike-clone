@@ -15,9 +15,27 @@ exports.createProduct = async (req, res) => {
 };
 
 exports.fetchProducts = async (req, res) => {
-  const product = await Product.find({}).exec();
+  let query = Product.find({});
+  if (req.query.color) {
+    query = query.find({ colors: { $in: req.query.color.split(",") } });
+  }
+  if (req.query.kids) {
+    query = query.find({ kids: { $in: req.query.kids.split(",") } });
+  }
+  if (req.query.gender) {
+    query = query.find({ gender: { $in: req.query.gender.split(",") } });
+  }
+  if (req.query.category) {
+    query = query.find({
+      category: { $in: req.query.category.split(",") },
+    });
+  }
+  if (req.query.size) {
+    query = query.find({ sizes: { $in: req.query.size.split(",") } });
+  }
   try {
-    res.status(200).json(product);
+    const docs = await query.exec();
+    res.status(200).json(docs);
   } catch (err) {
     console.log(err);
     res.status(400).json(err);
