@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.3fbf6b22.css",
-    "main.js": "/static/js/main.bbef50df.js",
+    "main.css": "/static/css/main.4d8e8e74.css",
+    "main.js": "/static/js/main.637e2b0e.js",
     "static/js/787.cda612ba.chunk.js": "/static/js/787.cda612ba.chunk.js",
     "static/media/branding.jpg": "/static/media/branding.75224baa94a668ec1a5e.jpg",
     "static/media/dressToImpress.jpg": "/static/media/dressToImpress.63af4b1c8f91c9f90cee.jpg",
@@ -24,12 +24,12 @@
     "static/media/bag.png": "/static/media/bag.9c816c6b923ef947a58e.png",
     "static/media/search.png": "/static/media/search.ca7aae46e8e72453beed.png",
     "index.html": "/index.html",
-    "main.3fbf6b22.css.map": "/static/css/main.3fbf6b22.css.map",
-    "main.bbef50df.js.map": "/static/js/main.bbef50df.js.map",
+    "main.4d8e8e74.css.map": "/static/css/main.4d8e8e74.css.map",
+    "main.637e2b0e.js.map": "/static/js/main.637e2b0e.js.map",
     "787.cda612ba.chunk.js.map": "/static/js/787.cda612ba.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.3fbf6b22.css",
-    "static/js/main.bbef50df.js"
+    "static/css/main.4d8e8e74.css",
+    "static/js/main.637e2b0e.js"
   ]
 }

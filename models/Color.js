@@ -1,8 +1,9 @@
 const mongoose = require("mongoose");
 const { Schema } = mongoose;
 const colorSchema = new Schema({
-  label: { type: String, require: true, unique: true },
-  value: { type: String, require: true, unique: true },
+  name: { type: String, require: true, unique: true },
+  class: { type: String, require: true, unique: true },
+  selectedClass: { type: String, require: true, unique: true },
 });
 const virtual = colorSchema.virtual("id");
 virtual.get(function () {

@@ -52,3 +52,20 @@ exports.fetchProductById = async (req, res) => {
     res.status(400).json(err);
   }
 };
+
+exports.updateProductById = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const product = await Product.findByIdAndUpdate(id, req.body, {
+      new: true,
+    });
+    product.discountPrice = Math.round(
+      product.price * (1 - product.discount / 100)
+    );
+    const updateProduct = await product.save();
+    res.status(200).json(updateProduct);
+  } catch (err) {
+    console.log(err);
+    res.status(200).json(err);
+  }
+};

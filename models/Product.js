@@ -6,7 +6,7 @@ const productSchema = new Schema({
   price: { type: Number, require: true },
   discount: { type: Number, require: true },
   sizes: { type: [String], require: true },
-  colors: { type: [String], require: true },
+  colors: { type: [Schema.Types.Mixed], require: true },
   category: { type: String, require: true },
   gender: { type: String },
   kids: { type: String },

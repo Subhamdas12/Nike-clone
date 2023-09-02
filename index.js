@@ -4,21 +4,108 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const server = express();
 const path = require("path");
+const session = require("express-session");
+const passport = require("passport");
+const LocalStrategy = require("passport-local").Strategy;
+const crypto = require("crypto");
+const jwt = require("jsonwebtoken");
+const JwtStrategy = require("passport-jwt").Strategy;
+const ExtractJwt = require("passport-jwt").ExtractJwt;
+const cookieParser = require("cookie-parser");
 const productsRouter = require("./routes/Products");
 const categoriesRouter = require("./routes/Categories");
 const colorsRouter = require("./routes/Colors");
 const sizesRouter = require("./routes/Sizes");
+const usersRouter = require("./routes/Users");
+const authsRouter = require("./routes/Auths");
+const { User } = require("./models/User");
+const { sanitizeUser, cookieExtractor } = require("./constants/services");
+let opts = {};
+opts.jwtFromRequest = cookieExtractor;
+opts.secretOrKey = "hello";
 //middlewares
 server.use(express.static(path.resolve(__dirname, "build")));
+server.use(cookieParser());
 server.use(cors({}));
 server.use(express.json());
+server.use(
+  session({
+    secret: "keyboard cat",
+    resave: false, // don't save session if unmodified
+    saveUninitialized: false, // don't create session until something stored
+  })
+);
+server.use(passport.authenticate("session"));
 server.use("/products", productsRouter.router);
 server.use("/categories", categoriesRouter.router);
 server.use("/colors", colorsRouter.router);
 server.use("/sizes", sizesRouter.router);
+server.use("/users", usersRouter.router);
+server.use("/auths", authsRouter.router);
 server.get("*", (req, res) => {
   res.sendFile(path.resolve("build", "index.html"));
 });
+
+passport.use(
+  "Local",
+  new LocalStrategy({ usernameField: "email" }, async function (
+    email,
+    password,
+    done
+  ) {
+    try {
+      const user = await User.findOne({ email: email });
+      if (!user) {
+        return done(null, false, { message: "Invalid credentials" });
+      }
+      crypto.pbkdf2(
+        password,
+        user.salt,
+        310000,
+        32,
+        "sha256",
+        async function (err, hashedPassword) {
+          if (!crypto.timingSafeEqual(user.password, hashedPassword)) {
+            return done(null, false, { message: "Invalid credentials" });
+          }
+          const token = jwt.sign(sanitizeUser(user), "hello");
+          done(null, { id: user.id, role: user.role, token });
+        }
+      );
+    } catch (err) {
+      done(err);
+    }
+  })
+);
+
+passport.use(
+  "jwt",
+  new JwtStrategy(opts, async function (jwt_payload, done) {
+    try {
+      const user = await User.findById(jwt_payload.id);
+      if (user) {
+        return done(null, sanitizeUser(user));
+      } else {
+        return done(null, false);
+      }
+    } catch (err) {
+      return done(err, false);
+    }
+  })
+);
+
+passport.serializeUser(function (user, cb) {
+  process.nextTick(function () {
+    cb(null, { id: user.id, role: user.role });
+  });
+});
+
+passport.deserializeUser(function (user, cb) {
+  process.nextTick(function () {
+    return cb(null, user);
+  });
+});
+
 main().catch((err) => console.log(err));
 const port = process.env.PORT || 8080;
 async function main() {
