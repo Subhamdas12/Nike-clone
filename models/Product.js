@@ -16,6 +16,12 @@ const productSchema = new Schema({
     default: 0,
     require: true,
   },
+  rating: {
+    type: Number,
+    min: [0, "wrong min rating"],
+    max: [5, "wrong max price"],
+    default: 0,
+  },
   origin: { type: String, require: true },
   declaration: { type: String, require: true },
   marketedBy: { type: String, require: true },

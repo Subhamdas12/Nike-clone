@@ -1,3 +1,5 @@
+const { Cart } = require("../models/Cart");
+const { Favourite } = require("../models/Favourite");
 const { Product } = require("../models/Product");
 
 exports.createProduct = async (req, res) => {
@@ -17,7 +19,9 @@ exports.createProduct = async (req, res) => {
 exports.fetchProducts = async (req, res) => {
   let query = Product.find({});
   if (req.query.color) {
-    query = query.find({ colors: { $in: req.query.color.split(",") } });
+    query = query.find({
+      colors: { $elemMatch: { name: { $in: req.query.color.split(",") } } },
+    });
   }
   if (req.query.kids) {
     query = query.find({ kids: { $in: req.query.kids.split(",") } });
@@ -67,5 +71,29 @@ exports.updateProductById = async (req, res) => {
   } catch (err) {
     console.log(err);
     res.status(200).json(err);
+  }
+};
+
+exports.fetchProductYouMayAlsoLike = async (req, res) => {
+  const { id } = req.user;
+  try {
+    const carts = await Cart.find({}, { product: 1 });
+    // console.log(carts[0].product.toString());
+    const favourites = await Favourite.find({}, { product: 1 });
+    let arr = [
+      ...carts.map((cart) => cart.product.toString()),
+      ...favourites.map((favorite) => favorite.product.toString()),
+    ];
+
+    const product = await Product.find({
+      _id: {
+        $nin: arr,
+      },
+    });
+
+    res.status(200).json(product);
+  } catch (err) {
+    console.log(err);
+    res.status(400).json(err);
   }
 };

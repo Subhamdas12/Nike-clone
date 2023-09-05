@@ -18,8 +18,14 @@ const colorsRouter = require("./routes/Colors");
 const sizesRouter = require("./routes/Sizes");
 const usersRouter = require("./routes/Users");
 const authsRouter = require("./routes/Auths");
+const cartRouter = require("./routes/Carts");
+const favouriteRouter = require("./routes/Favourites");
 const { User } = require("./models/User");
-const { sanitizeUser, cookieExtractor } = require("./constants/services");
+const {
+  sanitizeUser,
+  cookieExtractor,
+  isAuth,
+} = require("./constants/services");
 let opts = {};
 opts.jwtFromRequest = cookieExtractor;
 opts.secretOrKey = "hello";
@@ -42,6 +48,8 @@ server.use("/colors", colorsRouter.router);
 server.use("/sizes", sizesRouter.router);
 server.use("/users", usersRouter.router);
 server.use("/auths", authsRouter.router);
+server.use("/carts", isAuth(), cartRouter.router);
+server.use("/favourites", isAuth(), favouriteRouter.router);
 server.get("*", (req, res) => {
   res.sendFile(path.resolve("build", "index.html"));
 });
