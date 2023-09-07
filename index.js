@@ -10,7 +10,6 @@ const LocalStrategy = require("passport-local").Strategy;
 const crypto = require("crypto");
 const jwt = require("jsonwebtoken");
 const JwtStrategy = require("passport-jwt").Strategy;
-const ExtractJwt = require("passport-jwt").ExtractJwt;
 const cookieParser = require("cookie-parser");
 const productsRouter = require("./routes/Products");
 const categoriesRouter = require("./routes/Categories");
@@ -19,6 +18,7 @@ const sizesRouter = require("./routes/Sizes");
 const usersRouter = require("./routes/Users");
 const authsRouter = require("./routes/Auths");
 const cartRouter = require("./routes/Carts");
+const orderRouter = require("./routes/Orders");
 const favouriteRouter = require("./routes/Favourites");
 const { User } = require("./models/User");
 const {
@@ -26,13 +26,33 @@ const {
   cookieExtractor,
   isAuth,
 } = require("./constants/services");
+const bodyParser = require("body-parser");
+const { Order } = require("./models/Order");
 let opts = {};
 opts.jwtFromRequest = cookieExtractor;
 opts.secretOrKey = "hello";
 //middlewares
 server.use(express.static(path.resolve(__dirname, "build")));
 server.use(cookieParser());
-server.use(cors({}));
+server.use(cors());
+server.use(bodyParser.json());
+server.post("/verification", async (req, res) => {
+  // do a validation
+  const shasum = crypto.createHmac("sha256", process.env.RAZORPAY_KEY_SECRET);
+  shasum.update(JSON.stringify(req.body));
+  const digest = shasum.digest("hex");
+
+  if (digest === req.headers["x-razorpay-signature"]) {
+    const orderId = req.body.payload.payment.entity.notes.orderId;
+    const order = await Order.findByIdAndUpdate(orderId, {
+      paymentStatus: "received",
+    });
+  } else {
+    // pass it
+  }
+  res.json({ status: "ok" });
+});
+
 server.use(express.json());
 server.use(
   session({
@@ -46,10 +66,12 @@ server.use("/products", productsRouter.router);
 server.use("/categories", categoriesRouter.router);
 server.use("/colors", colorsRouter.router);
 server.use("/sizes", sizesRouter.router);
-server.use("/users", usersRouter.router);
+server.use("/users", isAuth(), usersRouter.router);
 server.use("/auths", authsRouter.router);
 server.use("/carts", isAuth(), cartRouter.router);
 server.use("/favourites", isAuth(), favouriteRouter.router);
+server.use("/orders", isAuth(), orderRouter.router);
+
 server.get("*", (req, res) => {
   res.sendFile(path.resolve("build", "index.html"));
 });
