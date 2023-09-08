@@ -97,3 +97,23 @@ exports.fetchProductYouMayAlsoLike = async (req, res) => {
     res.status(400).json(err);
   }
 };
+
+exports.fetchProductBySearch = async (req, res) => {
+  const keyword = req.query.search
+    ? {
+        $or: [
+          { title: { $regex: req.query.search } },
+          { category: { $regex: req.query.search } },
+        ],
+      }
+    : {};
+  const product = await Product.find(keyword, {
+    title: 1,
+    category: 1,
+    gender: 1,
+    kids: 1,
+    price: 1,
+    images: 1,
+  });
+  res.status(200).json(product);
+};
