@@ -37,6 +37,10 @@ exports.fetchProducts = async (req, res) => {
   if (req.query.size) {
     query = query.find({ sizes: { $in: req.query.size.split(",") } });
   }
+
+  if (req.query._sort && req.query._order) {
+    query = query.sort({ [req.query._sort]: req.query._order });
+  }
   try {
     const docs = await query.exec();
     res.status(200).json(docs);

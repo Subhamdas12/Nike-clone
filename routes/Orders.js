@@ -7,6 +7,6 @@ const {
 const router = express.Router();
 router
   .post("/createOrder", createOrder)
-  .post("/createOrderWithCard", createOrderWithCard)
-  .post("/validateOrderWithCard", validateOrderWithCard);
+  .post("/createOrderWithCard", createOrderWithCard);
+
 exports.router = router;

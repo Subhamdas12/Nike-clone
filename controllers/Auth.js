@@ -1,7 +1,7 @@
 const crypto = require("crypto");
 const { User } = require("../models/User");
 const jwt = require("jsonwebtoken");
-const { sanitizeUser } = require("../constants/services");
+const { sanitizeUser, sendMail } = require("../constants/services");
 exports.createUser = async (req, res) => {
   let user = await User.find({ email: req.body.email });
   if (user.length) {
@@ -72,4 +72,57 @@ exports.logout = (req, res) => {
       httpOnly: true,
     })
     .sendStatus(200);
+};
+
+exports.resetPasswordRequest = async (req, res) => {
+  const email = req.body.email;
+
+  const user = await User.findOne({ email: email });
+  if (user) {
+    const token = await crypto.randomBytes(48).toString("hex");
+    user.resetPasswordToken = token;
+    await user.save();
+    const resetPasswordLink =
+      "http://localhost:3000/resetPassword?token=" + token + "&email=" + email;
+    const subject = "reset password for Nike";
+    const html = `<p>Click <a href=${resetPasswordLink}>here</a> to Reset your password</p>`;
+    if (email) {
+      const response = await sendMail({ to: email, subject, html });
+      res.json(response);
+    } else {
+      res.sendStatus(400);
+    }
+  } else {
+    res.sendStatus(400);
+  }
+};
+
+exports.resetPassword = async (req, res) => {
+  const { email, password, token } = req.body;
+  const user = await User.findOne({ email: email, resetPasswordToken: token });
+  if (user) {
+    const salt = crypto.randomBytes(16);
+    crypto.pbkdf2(
+      password,
+      salt,
+      310000,
+      32,
+      "sha256",
+      async function (err, hashedPassword) {
+        user.password = hashedPassword;
+        user.salt = salt;
+        await user.save();
+        const subject = "password successfully reset for e-commerce";
+        const html = `<p>Successfully able to Reset Password</p>`;
+        if (email) {
+          const response = await sendMail({ to: email, subject, html });
+          res.json(response);
+        } else {
+          res.sendStatus(400);
+        }
+      }
+    );
+  } else {
+    res.sendStatus(400);
+  }
 };

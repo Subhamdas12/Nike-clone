@@ -15,5 +15,5 @@ router
   .get("/fetchProductYouMayAlsoLike", isAuth(), fetchProductYouMayAlsoLike)
   .get("/fetchProductBySearch", fetchProductBySearch)
   .post("/createProduct", createProduct)
-  .patch("/updateProductById/:id", updateProductById),
-  (exports.router = router);
+  .patch("/updateProductById/:id", updateProductById);
+exports.router = router;

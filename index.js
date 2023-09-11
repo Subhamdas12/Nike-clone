@@ -20,6 +20,7 @@ const authsRouter = require("./routes/Auths");
 const cartRouter = require("./routes/Carts");
 const orderRouter = require("./routes/Orders");
 const favouriteRouter = require("./routes/Favourites");
+const reviewRouter = require("./routes/Reviews");
 const { User } = require("./models/User");
 const {
   sanitizeUser,
@@ -71,6 +72,7 @@ server.use("/auths", authsRouter.router);
 server.use("/carts", isAuth(), cartRouter.router);
 server.use("/favourites", isAuth(), favouriteRouter.router);
 server.use("/orders", isAuth(), orderRouter.router);
+server.use("/reviews", reviewRouter.router);
 
 server.get("*", (req, res) => {
   res.sendFile(path.resolve("build", "index.html"));

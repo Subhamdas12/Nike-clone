@@ -2,10 +2,20 @@ require("dotenv").config();
 const crypto = require("crypto");
 const { Order } = require("../models/Order");
 const Razorpay = require("razorpay");
+const { User } = require("../models/User");
+const { invoiceTemplate, sendMail } = require("../constants/services");
 exports.createOrder = async (req, res) => {
   try {
     const order = new Order(req.body);
     const doc = await order.save();
+    const user = await User.findById(order.user);
+    // we can use await for this also
+    sendMail({
+      to: user.email,
+      html: invoiceTemplate(order),
+      subject: "Order Received",
+    });
+
     res.status(201).json(doc);
   } catch (err) {
     console.log(err);
@@ -33,20 +43,4 @@ exports.createOrderWithCard = async (req, res) => {
     console.log(err);
     res.status(400).json(err);
   }
-};
-
-exports.validateOrderWithCard = async (req, res) => {
-  const shasum = crypto.createHmac("sha256", process.env.RAZORPAY_KEY_SECRET);
-  shasum.update(JSON.stringify(req.body));
-  const digest = shasum.digest("hex");
-
-  console.log(digest, req.headers["x-razorpay-signature"]);
-
-  if (digest === req.headers["x-razorpay-signature"]) {
-    console.log("request is legit");
-    // process it
-  } else {
-    // pass it
-  }
-  res.json({ status: "ok" });
 };
