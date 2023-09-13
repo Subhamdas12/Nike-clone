@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.a79d882b.css",
-    "main.js": "/static/js/main.1521edea.js",
+    "main.css": "/static/css/main.eb752038.css",
+    "main.js": "/static/js/main.309f0d64.js",
     "static/js/787.cda612ba.chunk.js": "/static/js/787.cda612ba.chunk.js",
     "static/media/branding.jpg": "/static/media/branding.75224baa94a668ec1a5e.jpg",
     "static/media/dressToImpress.jpg": "/static/media/dressToImpress.63af4b1c8f91c9f90cee.jpg",
@@ -29,13 +29,14 @@
     "static/media/dustbin.png": "/static/media/dustbin.3dd6b0bd6bc6f6362ecd.png",
     "static/media/search.png": "/static/media/search.ca7aae46e8e72453beed.png",
     "static/media/filled-heart.png": "/static/media/filled-heart.bf2e642ba8736cc4acdc.png",
+    "static/media/edit.png": "/static/media/edit.0f46e2728eb984e21ce8.png",
     "index.html": "/index.html",
-    "main.a79d882b.css.map": "/static/css/main.a79d882b.css.map",
-    "main.1521edea.js.map": "/static/js/main.1521edea.js.map",
+    "main.eb752038.css.map": "/static/css/main.eb752038.css.map",
+    "main.309f0d64.js.map": "/static/js/main.309f0d64.js.map",
     "787.cda612ba.chunk.js.map": "/static/js/787.cda612ba.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.a79d882b.css",
-    "static/js/main.1521edea.js"
+    "static/css/main.eb752038.css",
+    "static/js/main.309f0d64.js"
   ]
 }

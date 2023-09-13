@@ -10,6 +10,7 @@ exports.fetchUserById = async (req, res) => {
       role: 1,
       firstName: 1,
       lastName: 1,
+      createdAt: 1,
     });
     res.status(200).json(user);
   } catch (err) {
@@ -28,6 +29,7 @@ exports.updateUser = async (req, res) => {
       role: user.role,
       firstName: user.firstName,
       lastName: user.lastName,
+      createdAt: user.createdAt,
       id: id,
     });
   } catch (err) {

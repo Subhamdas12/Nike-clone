@@ -364,3 +364,10 @@ exports.invoiceTemplate = function (order) {
  </body>
  </html>`;
 };
+
+exports.getAverageReview = (reviews) => {
+  let sumReview = reviews.reduce((sum, review) => {
+    return sum + review.rating;
+  }, 0);
+  return sumReview / reviews.length;
+};

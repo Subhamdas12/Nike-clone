@@ -44,3 +44,25 @@ exports.createOrderWithCard = async (req, res) => {
     res.status(400).json(err);
   }
 };
+
+exports.fetchOrdersByUser = async (req, res) => {
+  const { id } = req.user;
+  try {
+    const orders = await Order.find({ user: id });
+    res.status(200).json(orders);
+  } catch (err) {
+    console.log(err);
+    res.status(400).json(err);
+  }
+};
+
+exports.cancelOrder = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const data = await Order.findByIdAndDelete(id);
+    res.status(200).json(data);
+  } catch (err) {
+    console.log(err);
+    res.status(400).json(err);
+  }
+};

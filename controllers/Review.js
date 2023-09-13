@@ -1,3 +1,5 @@
+const { getAverageReview } = require("../constants/services");
+const { Product } = require("../models/Product");
 const { Review } = require("../models/Review");
 
 exports.createReview = async (req, res) => {
@@ -11,6 +13,15 @@ exports.createReview = async (req, res) => {
   try {
     const review = new Review({ ...req.body, user: id });
     const doc = await review.save();
+    const rating = await calculateReview(req.body.product);
+    const product1 = await Product.findByIdAndUpdate(
+      req.body.product,
+      {
+        rating: rating,
+      },
+      { new: true }
+    );
+
     const popDoc = await doc.populate("user", {
       id: 1,
       firstName: 1,
@@ -48,4 +59,10 @@ exports.fetchReviewByUser = async (req, res) => {
     console.log(err);
     res.status(400).json(err);
   }
+};
+
+const calculateReview = async (productId) => {
+  const reviews = await Review.find({ product: productId });
+  console.log(getAverageReview(reviews));
+  return getAverageReview(reviews);
 };
