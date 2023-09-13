@@ -83,7 +83,10 @@ exports.resetPasswordRequest = async (req, res) => {
     user.resetPasswordToken = token;
     await user.save();
     const resetPasswordLink =
-      "http://localhost:3000/resetPassword?token=" + token + "&email=" + email;
+      "https://nike-clone-tawny.vercel.app/resetPassword?token=" +
+      token +
+      "&email=" +
+      email;
     const subject = "reset password for Nike";
     const html = `<p>Click <a href=${resetPasswordLink}>here</a> to Reset your password</p>`;
     if (email) {
