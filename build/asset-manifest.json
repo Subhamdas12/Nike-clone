@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.eb752038.css",
-    "main.js": "/static/js/main.8be131e8.js",
+    "main.css": "/static/css/main.133b8777.css",
+    "main.js": "/static/js/main.30290459.js",
     "static/js/787.cda612ba.chunk.js": "/static/js/787.cda612ba.chunk.js",
     "static/media/branding.jpg": "/static/media/branding.75224baa94a668ec1a5e.jpg",
     "static/media/dressToImpress.jpg": "/static/media/dressToImpress.63af4b1c8f91c9f90cee.jpg",
@@ -31,12 +31,12 @@
     "static/media/filled-heart.png": "/static/media/filled-heart.bf2e642ba8736cc4acdc.png",
     "static/media/edit.png": "/static/media/edit.0f46e2728eb984e21ce8.png",
     "index.html": "/index.html",
-    "main.eb752038.css.map": "/static/css/main.eb752038.css.map",
-    "main.8be131e8.js.map": "/static/js/main.8be131e8.js.map",
+    "main.133b8777.css.map": "/static/css/main.133b8777.css.map",
+    "main.30290459.js.map": "/static/js/main.30290459.js.map",
     "787.cda612ba.chunk.js.map": "/static/js/787.cda612ba.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.eb752038.css",
-    "static/js/main.8be131e8.js"
+    "static/css/main.133b8777.css",
+    "static/js/main.30290459.js"
   ]
 }
